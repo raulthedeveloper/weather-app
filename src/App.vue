@@ -48,7 +48,6 @@ export default {
 
   .row{
     margin-top: .5rem;
-    border-top: solid 1px;
   }
 
   .col-6{
