@@ -82,11 +82,7 @@
         margin-bottom: 2rem;
     }
 
-    @media only screen and (max-width: 750px) {
-         .input-container{
-             width: 100%;
-         }
-     }
+    
 
     input {
         font-size: 20px;
@@ -101,4 +97,25 @@
         color: red;
         font-size: 26px;
     }
+
+    @media only screen and (max-width: 750px) {
+         .input-container{
+             width: 100%;
+         }
+     }
+
+     @media only screen and (max-width: 500px) {
+         .input-box{
+                 justify-content: center
+         }
+         input{
+             width: 98%;
+             margin-right: 0;
+             font-size: 20px;
+         }
+         .btn{
+             width: 100%;
+             margin-top: 10px;
+         }
+     }
 </style>
