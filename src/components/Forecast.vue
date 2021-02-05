@@ -26,9 +26,7 @@ export default {
     }
   },
  props:['current','forecast'],
- created(){
-   console.log(this.forecast)
- }
+ 
 }
 </script>
 

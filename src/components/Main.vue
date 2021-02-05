@@ -1,7 +1,7 @@
 <template>
   <div class="container">
    
-<Search v-on:changeSearch="updateResult($event)"/>   
+<Search @changeSearch="updateResult($event)" :error="error"/>   
 <Current 
 v-if="!isLoading"
   :location="location"
@@ -29,6 +29,8 @@ import Search from "./Search.vue"
 import Forecast from "./Forecast.vue"
 import Current from "./Current/Current.vue"
 import Loading from "./Loading.vue"
+
+
 export default {
   data(){
     return {
@@ -36,7 +38,8 @@ export default {
       current:null,
       forecast:null,
       isLoading:true,
-      search:String
+      search:String,
+      error:false
     }
   },
   components:{
@@ -64,23 +67,37 @@ export default {
      
   
     },
-    updateResult(search){
-  //       const options = {
-  //      method: 'GET',
-  //      url: `http://api.weatherapi.com/v1/forecast.json?key=1590231e5d674493844164905201310&q=${search}&days=5`,    
-  // }
+    methods:{
+      updateResult(search){
+        this.isLoading = true
 
-  // axios.request(options).then((response) => {
-  //       this.location= response.data.location
-  //       this.current = response.data.current
-  //       this.forecast = response.data.forecast.forecastday
+      
+        const options = {
+       method: 'GET',
+       url: `http://api.weatherapi.com/v1/forecast.json?key=1590231e5d674493844164905201310&q=${search}&days=5`,    
+  }
 
-  //       this.isLoading = false
-  //     })
+  axios.request(options).then((response) => {
+        console.log(response.status)
+
+        if(response.status === '400'){
+          this.error = true
+        }else{
+          this.search = search
+          this.location= response.data.location
+        this.current = response.data.current
+        this.forecast = response.data.forecast.forecastday
+
+        this.isLoading = false
+        }
+
+        
+      })
 
      
-      console.log(search)
     }
+    }
+    
     
     
 }
