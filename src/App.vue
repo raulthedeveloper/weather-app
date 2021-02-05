@@ -20,6 +20,7 @@ export default {
 
 
 
+
  body{
    background-color: #0379ea;
  }
@@ -41,10 +42,21 @@ export default {
     text-align: center;
     flex-direction: column;
     border-radius: 4px;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
     padding-top: 2rem;
-        box-shadow: 1px 7px 31px -3px;
+    box-shadow: 1px 7px 31px -3px;
+   
   }
+
+   @media only screen and (max-width: 750px) {
+   .card{
+     width:100%;
+     box-shadow: none;
+   }
+   .container{
+     margin-top: 2rem;
+   }
+ }
 
   .row{
     margin-top: .5rem;
@@ -62,7 +74,6 @@ export default {
     align-items: center;
     flex-direction: column;
     padding: 1rem;
-    border-right: solid 1px;
   }
 
   .btn{

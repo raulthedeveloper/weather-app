@@ -2,7 +2,7 @@
     <div class="input-container">
         <div class="input-box">
             <div>
-                <input type="text" placeholder="enter city or zip" v-model="search">
+                <input @keyup.enter="appSearch" type="text" placeholder="enter city or zip" v-model="search">
                 <button class="btn" @click="appSearch">Search</button>
             </div>
 
@@ -10,7 +10,8 @@
 
            
         </div>
-        <div class="searchList">
+        <div v-if="results">
+            <div class="searchList">
             <span>Florida</span>
             <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis dignissimos vel repellat atque reprehenderit itaque nobis optio. Ab id laboriosam eligendi quasi esse soluta error ex, consequatur quia accusantium commodi.</span>
         </div>
@@ -24,6 +25,8 @@
             <span>Florida</span>
             <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis dignissimos vel repellat atque reprehenderit itaque nobis optio. Ab id laboriosam eligendi quasi esse soluta error ex, consequatur quia accusantium commodi.</span>
         </div>
+        </div>
+        
     </div>
 
 
@@ -35,39 +38,55 @@
         data() {
             return {
                 search: null,
+                results:false
             }
         },
         methods: {
             appSearch() {
                 this.$emit('changeSearch',this.search)
+                this.search = null
             }
         }
     }
 </script>
 
 <style scoped>
+
     .searchList{
         display: flex;
         flex-direction: row;
         padding: 2rem;
+        background-color: #045fb5;
+        margin: 10px;
+        color: white;
+
     }
 
     .searchList:nth-child(odd){
-        background-color:#80808030;
+        background-color:#0379ea4a;
+        color: black;
     }
 
     .input-box {
         display: flex;
         justify-content: space-between;
+        margin: 10px;
     }
+
+     
 
     .input-container {
         background-color: white;
-        width: 65%;
-        padding: 1.5rem;
+        width: 70%;
         border-radius: 5px;
         margin-bottom: 2rem;
     }
+
+    @media only screen and (max-width: 750px) {
+         .input-container{
+             width: 100%;
+         }
+     }
 
     input {
         font-size: 20px;

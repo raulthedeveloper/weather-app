@@ -20,4 +20,11 @@ img{
     display: block;
     margin: auto;
 }
+
+@media only screen and (max-width: 750px) {
+    div{
+        width: 100%;
+        min-height: 80vh;
+    }
+}
 </style>

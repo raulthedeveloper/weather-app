@@ -1,8 +1,7 @@
 <template>
   
      <div class="card">
-     
-     
+       
      <div class="col-2" v-for="(day, index) in forecast" :key="index">
         <h3>{{day.date}}</h3>
         <span class="forecast-value"> {{day.day.maxtemp_f}}&deg;{{symbol}}</span>
@@ -31,6 +30,17 @@ export default {
 </script>
 
 <style scoped>
+  
+
+.col-2{
+  background-color: #0379ea4a;
+  margin: 10px;
+}
+
+.col-2:nth-child(even){
+ background-color: #045fb5;
+    color: white;
+}
 
 h3{
   font-size: 2rem;
@@ -48,5 +58,15 @@ h3{
     font-size: 1.7rem;
     color: #000000a6;
   }
+
+    @media only screen and (max-width: 600px) {
+      .card{
+       flex-direction: column;
+       align-items: center;
+  }
+  .col-2{
+    width: 90%;
+  }
+    }
 </style>
 

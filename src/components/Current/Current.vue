@@ -6,7 +6,7 @@
       <span class="current-sub-title">{{forecast[0].date}}</span>
       
 
-      <div class="row" style="display:flex; justify-content:space-around">
+      <div class="row main-display">
           <div class="row flex-column">
                <span class="current-temp">{{current.temp_f}}&deg;{{symbol}}</span>
                <span>Feels like {{current.feelslike_f}}&deg;{{symbol}}</span>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="flex-row">
-          <div class="col-6" style="margin-right:1.5rem">
+          <div class="col-6">
            
 
             <div class="row meta-value">
@@ -165,6 +165,7 @@ export default {
     .flex-row{
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .meta-value{
@@ -172,7 +173,15 @@ export default {
         display: flex;
         padding-top: 2rem;
         padding-bottom: 2rem;
-            border-top: solid 1px
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        background-color: #0379ea4a;
+    }
+    .meta-value:nth-child(even){
+        background-color:#045fb5;
+        color: white;
+    
     }
 
     .meta-value span:first-of-type{
@@ -183,14 +192,40 @@ export default {
         font-size: 1.3rem;
     }
 
+    .btn{
+        width: 10rem;
+        font-size: 22px;
+    }
+
+    .main-display{
+        display:flex; 
+        justify-content:space-around; 
+        flex-wrap:wrap-reverse
+    }
+
     @media only screen and (max-width: 800px) {
 
         .col-6{
-            width: 100%;
             flex-direction: column;
         }
   
 }
+
+ @media only screen and (max-width: 600px) {
+     .col-6{
+         width: 100%;
+     }
+     .meta-value{
+         flex-direction: column;
+     }
+
+    .main-display{
+    flex-wrap: wrap-reverse;
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-bottom: 2rem;
+    }
+ }
 
  
 </style>
