@@ -15,6 +15,7 @@ div{
     min-height: 300px;
     display: flex;
     width: 70%;
+    margin: auto;
 }
 img{
     display: block;
