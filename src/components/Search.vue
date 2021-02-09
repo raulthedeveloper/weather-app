@@ -14,6 +14,8 @@
         </div>
 
     <Loading v-if="isLoading"/>
+
+    
         <div v-show="!hidden" v-if="results && !isLoading">
 
             
@@ -65,6 +67,7 @@
                 this.hidden = true
                 this.hiddenButton = false
                 this.lockOtherResult = false
+                
                 }
                 
                 
@@ -112,6 +115,7 @@
     color: black;
     border-radius: 6px;
     font-size: 26px;
+    line-height: .9;
 }
 
     

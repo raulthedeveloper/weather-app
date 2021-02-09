@@ -69,7 +69,7 @@ export default {
 
 
   .col-2{
-    width: 20%;
+    width: 30%;
     display: flex;
     align-items: center;
     flex-direction: column;

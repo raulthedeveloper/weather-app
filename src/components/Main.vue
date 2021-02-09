@@ -36,7 +36,7 @@ export default {
     return {
       location:null,
       current:null,
-      forecast:null,
+      forecast:[],
       isLoading:true,
       search:String,
       error:false
@@ -63,9 +63,11 @@ export default {
         this.forecast = response.data.forecast.forecastday
 
         this.isLoading = false
+      }).then(()=>{
+        console.log(this.forecast)
       })
      
-  
+
     },
     methods:{
       updateResult(search){
@@ -78,7 +80,6 @@ export default {
   }
 
   axios.request(options).then((response) => {
-        console.log(response.status)
 
         if(response.status === '400'){
           this.error = true
