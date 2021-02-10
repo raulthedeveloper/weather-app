@@ -1,7 +1,6 @@
 <template>
 <div>
-   <img src="../load-spinner.gif" alt="">
-
+   <img src="../load-spinner.gif" alt="loading spinner">
 </div>
 </template>
 
@@ -17,6 +16,7 @@ div{
     width: 70%;
     margin: auto;
 }
+
 img{
     display: block;
     margin: auto;

@@ -1,7 +1,14 @@
 <template>
   
-     <div class="card">
-       <Hourly v-if="hourly" @backtoHourly="back" :data="forecast.hour"/>
+     <div class="card" style="padding-top:0;padding-bottom:0">
+       
+       <Hourly v-if="hourly" 
+       @backtoHourly="back" 
+       :data="forecast[currentHourly].hour" 
+       :location="location.name"
+       :forecastDate="forecast[currentHourly].date"
+       />
+
      <div v-else class="col-2" v-for="(day, index) in forecast" :key="index">
         <h3>{{day.date}}</h3>
         <span class="forecast-value"> {{day.day.maxtemp_f}}&deg;{{symbol}}</span>
@@ -9,7 +16,8 @@
         <span class="forecast-value"><img width="60" :src="day.day.condition.icon" alt=""></span>
         <small>Chance of Snow</small>
         <span class="forecast-value">{{day.day.daily_chance_of_snow}}%</span>
-        <button @click="hourlyForecast" class="btn">Hourly</button>
+
+        <button @click="hourlyForecast(index)" class="btn">Hourly</button>
       </div>
 
       
@@ -25,16 +33,18 @@ export default {
     return {
       symbol:"F",
       measure:"mph",
-      hourly:false
+      hourly:false,
+      currentHourly:0,
     }
   },
- props:['current','forecast'],
+ props:['current','forecast','location'],
  components:{
    Hourly
  },
  methods:{
-   hourlyForecast(){
+   hourlyForecast(index){
      this.hourly = !this.hourly
+     this.currentHourly = index
    },
    back(){
      this.hourly = false
@@ -64,6 +74,7 @@ h3{
 
   .card{
     flex-direction: row;
+    
   }
 
   .forecast-value{

@@ -15,6 +15,7 @@ v-if="!isLoading"
 v-if="!isLoading"
 :current="current"
 :forecast="forecast"
+:location="location"
 
 />
 
@@ -26,7 +27,7 @@ v-if="!isLoading"
 <script>
 import axios from 'axios'
 import Search from "./Search.vue"
-import Forecast from "./Forecast.vue"
+import Forecast from "./Forecast/Forecast.vue"
 import Current from "./Current/Current.vue"
 import Loading from "./Loading.vue"
 
