@@ -25,14 +25,14 @@
          
          <span><img style="margin-right:10px" src="../../assets/drop.png" alt="precipitation">{{hour.precip_in}}%</span>
         <span><img style="margin-right:10px" src="../../assets/wind.png" alt="wind speed">{{hour.wind_mph}}mph</span>
-        <span @click="dropdown">
-            <img v-if="!dropdownActive" class="chevron" src="../../assets/down-arrow.png">
+        <span @click="dropdown(index)">
+            <img v-if="index === displayActive  ? true : false" class="chevron" src="../../assets/down-arrow.png">
             <img v-else class="chevron" src="../../assets/up-arrow.png">
             </span>
          </div>
          
 
-            <div v-if="dropdownActive" class="hourly-sub hourly">
+            <div  class="hourly-sub hourly"  v-show="index === displayActive  ? true : false">
                 <span>
                     <img src="../../assets/windsock.png" alt="">
                     Wind Direction: {{ hour.wind_dir }}
@@ -74,7 +74,17 @@
 export default {
     data(){
         return {
-            dropdownActive:false
+            dropdownActive:{
+                display: 'flex',
+                paddingTop: '1rem', 
+                fontSize: '26px',
+                lineHeight: '.9',
+                listStyleType: 'none',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+            },
+            displayActive:Number,
+            hide:true
         }
     },
     props:['data','location','forecastDate'],
@@ -82,9 +92,14 @@ export default {
         back(){
             this.$emit('backtoHourly')
         },
-        dropdown(){
-            console.log("drop down works")
-            this.dropdownActive = !this.dropdownActive
+        dropdown(index){
+            if(this.displayActive !== index){
+                this.displayActive = index
+            }else{
+                this.displayActive = null
+            }
+            
+            
         }
     }
 }
@@ -95,6 +110,7 @@ export default {
     display: flex;
     justify-content: space-between;
 }
+
 
 
 
@@ -137,12 +153,17 @@ div{
 .hourly-sub{
     background-color: white;
     color: black;
-    flex-wrap: wrap
+    padding-bottom: 1rem;
 }
 
 .hourly-container:nth-child(odd){
     background-color: #bfd9fa;
     color: black;
+}
+
+.dropdown-hourly {
+    display: none;
+    
 }
 
 .hourly {
