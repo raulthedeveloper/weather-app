@@ -189,4 +189,17 @@ div{
         justify-content: space-between;
         margin: 10px;
     }
+
+    @media only screen and (max-width: 532px) {
+        .hourly-sub span{
+            display: block;
+            width: 100%;
+            /* border-bottom: solid; */
+            background: #e4e4e4;
+                }
+
+                .hourly-sub span:nth-child(even){
+                    background-color: #f7f7f7;
+                }
+    }
 </style>

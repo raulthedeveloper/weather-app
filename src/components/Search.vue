@@ -4,11 +4,12 @@
             <div>
                 <input @keyup.enter="appSearch" type="text" placeholder="enter city or zip" v-model="search">
                 <button class="btn" @click="appSearch">Search</button>
-                <button class="btn" v-show="results" @click="otherResults" :disabled="lockOtherResult">Other Results</button>
-                <button class="btn" v-show="hiddenButton" @click="hidden = !hidden">{{hidden ? 'Show List' : 'Hide List'}}</button>
+                <button  class="btn" v-if="!error" v-show="results" @click="otherResults" :disabled="lockOtherResult">Other Results</button>
+                <button class="btn"  v-if="!error" v-show="hiddenButton" @click="hidden = !hidden">{{hidden ? 'Show List' : 'Hide List'}}</button>
+                <span v-if="error" class="no-result">No Result</span>
             </div>
 
-            <span v-if="error" class="no-result">No Result</span>
+            
 
 
         </div>
@@ -50,29 +51,40 @@
         data() {
             return {
                 search: "",
+                currentSearch:"",
                 results: false,
                 searchResults: [],
                 hidden:true,
                 isLoading:false,
                 hiddenButton:false,
-                lockOtherResult:true
+                lockOtherResult:true,
+                
 
             }
         },
         methods: {
             appSearch() {
+                
+                if(this.search === this.currentSearch){
+                    return
+                }
+
+                
+
                 if(this.search !== ""){
                 this.$emit('changeSearch', this.search)
                 this.results = true
                 this.hidden = true
                 this.hiddenButton = false
                 this.lockOtherResult = false
-                
+                this.currentSearch = this.search
                 }
                 
+               
                 
             },
             resultSearch(result){
+                // Once search results are populated they become links that when clicked call to the api with result
                 this.lockOtherResult = false
                 this.search = result
                 this.appSearch()
@@ -81,6 +93,7 @@
                 this.results = false
             },
             otherResults() {
+                //Api is called when other results is clicked in order to populate search result (not initially called unless user clicks button)
                 if(this.search !== "" && !this.lockOtherResult){
                 this.lockOtherResult = true
                 this.hidden = false
@@ -92,9 +105,18 @@
                 }
 
                 axios.request(options).then((response) => {
+                    this.searchResults = []
                     this.searchResults = response.data
 
                     this.isLoading = false
+                }).then(() =>{
+                     if(this.searchResults.length === 0){
+                    this.noSearch = true
+                    
+                }else{
+                    this.noSearch = false
+                   
+                }
                 })
                 }
                 
@@ -162,8 +184,13 @@
     }
 
     .no-result {
-        color: red;
-        font-size: 26px;
+        color: #a70000;
+        font-size: 17px;
+        background-color: #fd3a3a87;
+        padding: .3rem;
+        margin-top: 16px;
+        padding-right: 2rem;
+        padding-left: 2rem;
     }
 
     @media only screen and (max-width: 750px) {
@@ -172,9 +199,9 @@
         }
     }
 
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 532px) {
         .input-box {
-            justify-content: center
+            flex-direction: column;
         }
 
         input {
@@ -186,6 +213,11 @@
         .btn {
             width: 100%;
             margin-top: 10px;
+        }
+
+        .no-result{
+            display: block;
+            text-align: center;
         }
     }
 </style>

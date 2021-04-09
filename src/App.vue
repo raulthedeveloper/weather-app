@@ -26,7 +26,7 @@ export default {
  }
 
   .container{
-    margin-top: 5rem;
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -35,7 +35,7 @@ export default {
   }
 
   .card{
-    margin-top: 5rem;
+    margin-top: 2rem;
     width: 70%;
     background-color: white;
     display: flex;
