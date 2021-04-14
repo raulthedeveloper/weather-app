@@ -1,15 +1,16 @@
 <template>
   
-     <div class="card" style="padding-top:0;padding-bottom:0">
+     <div class="card" style="padding-top:0;padding-bottom:0" :style="darkMode ? 'background:#3e3e3e' : null">
        
        <Hourly v-if="hourly" 
        @backtoHourly="back" 
        :data="forecast[currentHourly].hour" 
        :location="location.name"
        :forecastDate="forecast[currentHourly].date"
+       :darkMode="darkMode"
        />
 
-     <div v-else class="col-2" v-for="(day, index) in forecast" :key="index">
+     <div v-else class="col-2" :class="darkMode ? 'darkMode': 'lightMode'"  v-for="(day, index) in forecast" :key="index">
         <h3>{{day.date}}</h3>
         <span class="forecast-value"> {{day.day.maxtemp_f}}&deg;{{symbol}}</span>
         <span class="&deg;Forecast-value-small">{{day.day.mintemp_f}}&deg;{{symbol}}</span>
@@ -37,7 +38,7 @@ export default {
       currentHourly:0,
     }
   },
- props:['current','forecast','location'],
+ props:['current','forecast','location','darkMode'],
  components:{
    Hourly
  },
@@ -58,14 +59,23 @@ export default {
     margin-top: 1rem;
   }
 
-.col-2{
+.light-mode{
   background-color: #0379ea4a;
   margin: 10px;
 }
 
-.col-2:nth-child(even){
+.light-mode:nth-child(even){
  background-color: #045fb5;
     color: white;
+}
+
+.darkMode{
+  background-color:  #961d7e;
+  color: white;
+}
+
+.darkMode:nth-child(even){
+  background-color: #5a0d4b;
 }
 
 h3{
@@ -74,8 +84,22 @@ h3{
 
   .card{
     flex-direction: row;
+    animation: fadeup 2s forwards;
     
   }
+
+  @keyframes fadeup {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(90px);
+        
+    }
+    100% {
+        opacity: 1;
+        
+        -webkit-transform: translateY(0);
+    }
+}
 
   .forecast-value{
     font-size: 2.2rem;

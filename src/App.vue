@@ -1,5 +1,18 @@
 <template>
-  <Main />
+<div :class="darkMode ? 'darkMode-body' : 'lightMode-body'">
+<div class="container" style="margin:0; ">
+  <span  style="margin-bottom:.5rem">
+    Dark Mode
+  </span>
+     
+<label class="switch">
+  <input type="checkbox" @click="darkMode = !darkMode">
+  <span class="slider round"></span>
+</label>
+</div>
+  <Main :darkMode="darkMode"/>
+</div>
+
 </template>
 
 <script>
@@ -9,20 +22,109 @@ export default {
   name: 'App',
   components: {
     Main
+  },
+  data(){
+    return {
+      darkMode:false
+    }
   }
 }
 </script>
 
 <style>
+*{
+  margin: 0;
+}
+#app{
+  height: 100vh;
+}
+
+#darkMode-text{
+    color: white;
+}
+
+#darkMode-background{
+  background-color:  #961d7e;
+  color: white;
+
+}
+
+#darkMode-background:nth-child(even){
+background-color: #5a0d4b;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-bottom: 1.5rem;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+.darkMode-body{
+  background-color: #1c1f21;
+}
 
 
 
 
-
-
-
- body{
+ .lightMode-body{
    background-color: #0379ea;
+  padding-bottom: 3rem;
  }
 
   .container{
@@ -91,5 +193,106 @@ export default {
     background: #145d14;
   }
 
+
+.fade-down{
+    animation: fadedown 1s forwards ease-out;
+
+}
+
+@keyframes fadedown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+
+.fade-up{
+    animation: fadeup 1s forwards ease-out;
+
+}
+
+@keyframes fadeup {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(90px);
+        
+    }
+    100% {
+        opacity: 1;
+        
+        -webkit-transform: translateY(0);
+    }
+}
+
+
+
+
+.fade-in{
+    animation: fadein 1.5s forwards ease-out;
+
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+    
+    .slide-col .meta-value{
+       
+        animation: slidein 0.5s forwards ease-out ;
+        transform-origin: 50% 0%;
+    }
+
+.slide-out-col .meta-value{
+       
+        animation: slideout 0.5s forwards ease-out ;
+        transform-origin: 50% 0%;
+    }
+
+
+
+
+.slide-in{
+   animation: slidein 0.5s forwards ease-out ;
+  transform-origin: 50% 0%;
+}
+
+.slide-out{
+       animation: slideout 0.5s forwards ease-out ;
+  transform-origin: 50% 0%;
+}
+   
+
+
+    @keyframes slidein {
+      0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1.0);
+    }
+}
+
+@keyframes slideout {
+      0% {
+        transform: scaleY(1.0);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}
 
 </style>

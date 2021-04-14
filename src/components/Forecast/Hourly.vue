@@ -1,9 +1,9 @@
 <template>
 
   <div >
-      <div class="card-title">
+      <div :id="darkMode ? 'darkMode-text' : null" class="card-title">
           <div>
-              <h2>Hourly Weather - <span style="font-weight: 100;
+              <h2 >Hourly Weather - <span style="font-weight: 100;
     color: #000000a1;">{{ location }}</span></h2>
                 <h3>{{ forecastDate }}</h3>
           </div>
@@ -32,7 +32,7 @@
          </div>
          
 
-            <div  class="hourly-sub hourly"  v-show="index === displayActive  ? true : false">
+            <div  class="hourly-sub hourly" :id="darkMode ? 'darkMode-background' : null"  v-show="index === displayActive  ? true : false">
                 <span>
                     <img src="../../assets/windsock.png" alt="">
                     Wind Direction: {{ hour.wind_dir }}
@@ -87,7 +87,7 @@ export default {
             hide:true
         }
     },
-    props:['data','location','forecastDate'],
+    props:['data','location','forecastDate','darkMode'],
     methods:{
         back(){
             this.$emit('backtoHourly')
@@ -146,7 +146,8 @@ div{
 .hourly-container{
     background-color: #065eb5;
     color: white;
-    
+       animation: slidein .5s ease-out;
+        transform-origin: top;
 
 }
 
@@ -154,6 +155,9 @@ div{
     background-color: white;
     color: black;
     padding-bottom: 1rem;
+        animation: slidein .5s ease-out;
+        transform-origin: top;
+
 }
 
 .hourly-container:nth-child(odd){
@@ -182,7 +186,14 @@ div{
     margin-right: 1rem;
 }
 
-
+@keyframes slidein {
+      0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1.0);
+    }
+}
 
 .input-box {
         display: flex;

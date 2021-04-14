@@ -1,8 +1,8 @@
 <template>
-    <div class="input-container">
+    <div class="input-container fade-in" :style="darkMode ? 'background:#3e3e3e' : null">
         <div class="input-box">
             <div>
-                <input @keyup.enter="appSearch" type="text" placeholder="enter city or zip" v-model="search">
+                <input :style="darkMode ? 'background:black; color:white' : null" @keyup.enter="appSearch" type="text" placeholder="enter city or zip" v-model="search">
                 <button class="btn" @click="appSearch">Search</button>
                 <button  class="btn" v-if="!error" v-show="results" @click="otherResults" :disabled="lockOtherResult">Other Results</button>
                 <button class="btn"  v-if="!error" v-show="hiddenButton" @click="hidden = !hidden">{{hidden ? 'Show List' : 'Hide List'}}</button>
@@ -44,7 +44,7 @@
     import Loading from './Loading.vue'
 
     export default {
-        props: ['error'],
+        props: ['error','darkMode'],
         components:{
             Loading
         },
