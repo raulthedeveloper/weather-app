@@ -2,9 +2,8 @@
 
   <div >
       <div :id="darkMode ? 'darkMode-text' : null" class="card-title">
-          <div>
-              <h2 >Hourly Weather - <span style="font-weight: 100;
-    color: #000000a1;">{{ location }}</span></h2>
+          <div style="padding:1rem">
+              <h2 >Hourly Weather - <span  :style="darkMode ? ' color:white;font-weight: 100' : 'color: #000000a1; font-weight: 100'">{{ location }}</span></h2>
                 <h3>{{ forecastDate }}</h3>
           </div>
           
@@ -12,7 +11,7 @@
       </div>
       
 
-     <div v-for="(hour,index) in data" :key="hour + index" class="hourly-container">
+     <div v-for="(hour,index) in data" :key="hour + index" class="hourly-container" :id="darkMode ? 'darkMode-background' : null">
          <div class="hourly">
              <span>
                  {{ hour.time.split(" ").slice(1,2).toString().split('').slice(1,2).toString()}} AM
@@ -32,7 +31,7 @@
          </div>
          
 
-            <div  class="hourly-sub hourly" :id="darkMode ? 'darkMode-background' : null"  v-show="index === displayActive  ? true : false">
+            <div  class="hourly-sub hourly" :id="darkMode ? 'darkMode-meta' : null"  v-show="index === displayActive  ? true : false">
                 <span>
                     <img src="../../assets/windsock.png" alt="">
                     Wind Direction: {{ hour.wind_dir }}
@@ -111,7 +110,10 @@ export default {
     justify-content: space-between;
 }
 
-
+#darkMode-meta{
+  background-color: #3e3e3e;
+    color: white;
+}
 
 
 .card-title div{

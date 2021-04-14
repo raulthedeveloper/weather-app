@@ -1,6 +1,6 @@
 <template>
   
-     <div class="card" style="padding-top:0;padding-bottom:0" :style="darkMode ? 'background:#3e3e3e' : null">
+     <div class="card" style="padding-top:0;padding-bottom:0;margin-bottom: 4rem;" :style="darkMode ? 'background:#3e3e3e' : null">
        
        <Hourly v-if="hourly" 
        @backtoHourly="back" 
@@ -59,17 +59,18 @@ export default {
     margin-top: 1rem;
   }
 
-.light-mode{
+.lightMode{
   background-color: #0379ea4a;
   margin: 10px;
 }
 
-.light-mode:nth-child(even){
+.lightMode:nth-child(even){
  background-color: #045fb5;
     color: white;
 }
 
 .darkMode{
+  margin: 10px;
   background-color:  #961d7e;
   color: white;
 }
@@ -77,6 +78,9 @@ export default {
 .darkMode:nth-child(even){
   background-color: #5a0d4b;
 }
+
+
+
 
 h3{
   font-size: 2rem;
@@ -87,6 +91,8 @@ h3{
     animation: fadeup 2s forwards;
     
   }
+
+
 
   @keyframes fadeup {
     0% {

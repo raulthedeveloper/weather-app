@@ -71,7 +71,7 @@
                <span>{{current.humidity}}%</span>
            </div>
 
-          <div v-if="seeMore" class="slide-col">
+          <div v-if="seeMore" :class="slideDown < 2 ? 'slide-col' : null">
 
                <div class="row" :class="darkMode ? 'darkMode-meta-value' : 'meta-value'">
                <span>Moon Phase</span>
@@ -97,7 +97,7 @@
       </div>
 
        <div class="row" style="padding-top:2rem;">
-               <button class="btn fade-in" @click="seeMore = !seeMore">{{!seeMore ? 'See More' : 'See Less'}}</button>
+               <button class="btn fade-in" @click="seeMoreToggle">{{!seeMore ? 'See More' : 'See Less'}}</button>
            </div>
     </div>
 </template>
@@ -110,7 +110,8 @@ export default {
             symbol:"F",
             measure:"mph",
             seeMore:false,
-            weather:String
+            weather:String,
+            slideDown:0
         }
     },
    
@@ -118,8 +119,12 @@ export default {
     props:['location','current','forecast','darkMode'],
 
     methods:{
-        slideDown(){
-
+        seeMoreToggle(){
+            this.seeMore = !this.seeMore
+            // if(this.slideDown < 2){
+            //     this.slideDown+=1
+            // }
+            
         }
     }
    

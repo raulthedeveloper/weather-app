@@ -1,15 +1,18 @@
 <template>
 <div :class="darkMode ? 'darkMode-body' : 'lightMode-body'">
+
+
 <div class="container" style="margin:0; ">
-  <span  style="margin-bottom:.5rem">
+  <span  :style="'margin-top:2rem; color:white'">
     Dark Mode
   </span>
-     
+ 
 <label class="switch">
-  <input type="checkbox" @click="darkMode = !darkMode">
+  <input type="checkbox" @click="toggleDarkMode" :checked="darkMode">
   <span class="slider round"></span>
 </label>
 </div>
+
   <Main :darkMode="darkMode"/>
 </div>
 
@@ -23,9 +26,24 @@ export default {
   components: {
     Main
   },
+  mounted(){
+    if(localStorage.getItem('darkMode') === null){
+      localStorage.setItem('darkMode',JSON.stringify(false))
+    }else{
+       localStorage.setItem('darkMode',JSON.stringify(this.darkMode))
+    }
+   
+  },
   data(){
     return {
-      darkMode:false
+      darkMode:JSON.parse(localStorage.getItem('darkMode'))
+    }
+  },
+  methods:{
+    toggleDarkMode(){
+      this.darkMode = !this.darkMode
+       localStorage.setItem('darkMode',JSON.stringify(this.darkMode))
+        console.log(JSON.parse(localStorage.getItem('darkMode')))
     }
   }
 }
@@ -52,6 +70,8 @@ export default {
 #darkMode-background:nth-child(even){
 background-color: #5a0d4b;
 }
+
+
 
 .switch {
   position: relative;
@@ -92,11 +112,11 @@ background-color: #5a0d4b;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #961d7e;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #961d7e;
 }
 
 input:checked + .slider:before {
@@ -117,6 +137,7 @@ input:checked + .slider:before {
 
 .darkMode-body{
   background-color: #1c1f21;
+  
 }
 
 
@@ -257,6 +278,18 @@ input:checked + .slider:before {
     }
 
 .slide-out-col .meta-value{
+       
+        animation: slideout 0.5s forwards ease-out ;
+        transform-origin: 50% 0%;
+    }
+
+ .slide-col .darkMode-meta-value{
+       
+        animation: slidein 0.5s forwards ease-out ;
+        transform-origin: 50% 0%;
+    }
+
+.slide-out-col .darkMode-meta-value{
        
         animation: slideout 0.5s forwards ease-out ;
         transform-origin: 50% 0%;

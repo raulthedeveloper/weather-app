@@ -9,7 +9,7 @@
     <Search @changeSearch="updateResult($event)" :error="error"  :darkMode="darkMode"/>
     <Current v-if="!isLoading" :location="location" :current="current" :forecast="forecast" :darkMode="darkMode"/>
 
-    <Loading v-if="isLoading" />
+    <Loading :darkMode="darkMode" v-if="isLoading" />
 
     <Forecast v-if="!isLoading" :current="current" :forecast="forecast" :location="location" :darkMode="darkMode"/>
 

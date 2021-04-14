@@ -14,7 +14,7 @@
 
         </div>
 
-    <Loading v-if="isLoading"/>
+    <Loading :darkMode="darkMode" v-if="isLoading"/>
 
     
         <div v-show="!hidden" v-if="results && !isLoading">
