@@ -10,9 +10,9 @@
      <button class="btn-back" @click="back">Back</button>
       </div>
       
-
+    <div class="hourly-forecast-container">
      <div v-for="(hour,index) in data" :key="hour + index" class="hourly-container" :id="darkMode ? 'darkMode-background' : null">
-         <div class="hourly">
+         <div class="hourly ">
              <span>
                  {{ hour.time.split(" ").slice(1,2).toString().split('').slice(1,2).toString()}} AM
                  </span>
@@ -31,7 +31,7 @@
          </div>
          
 
-            <div  class="hourly-sub hourly" :id="darkMode ? 'darkMode-meta' : null"  v-show="index === displayActive  ? true : false">
+            <div  class="hourly-sub hourly" :class="hide ? 'slide-down-sub' : '.slide-up-sub'" :id="darkMode ? 'darkMode-meta' : null"  v-show="index === displayActive">
                 <span>
                     <img src="../../assets/windsock.png" alt="">
                     Wind Direction: {{ hour.wind_dir }}
@@ -60,7 +60,7 @@
             </div>
 
      </div>
-
+    </div>
       
     
 
@@ -94,8 +94,10 @@ export default {
         dropdown(index){
             if(this.displayActive !== index){
                 this.displayActive = index
+                this.hide = true
             }else{
                 this.displayActive = null
+                this.hide = false
             }
             
             
@@ -105,6 +107,24 @@ export default {
 </script>
 
 <style scoped>
+.hourly-forecast-container{
+    animation: grow 1.5s forwards ease-out;
+    overflow: hidden;
+    transform-origin: top
+}
+
+@keyframes grow {
+    from{
+        transform: scaleY(0) ;
+    }
+    to{
+        transform:scaleY(1)
+    }
+}
+
+
+
+
 .card-title{
     display: flex;
     justify-content: space-between;
@@ -148,7 +168,6 @@ div{
 .hourly-container{
     background-color: #065eb5;
     color: white;
-       animation: slidein .5s ease-out;
         transform-origin: top;
 
 }
@@ -157,20 +176,23 @@ div{
     background-color: white;
     color: black;
     padding-bottom: 1rem;
-        animation: slidein .5s ease-out;
         transform-origin: top;
+        
 
 }
+
+.slide-down-sub{
+    animation: slidein .5s ease-out;
+}
+
+
 
 .hourly-container:nth-child(odd){
     background-color: #bfd9fa;
     color: black;
 }
 
-.dropdown-hourly {
-    display: none;
-    
-}
+
 
 .hourly {
     display: flex;
@@ -187,6 +209,10 @@ div{
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
+
+
+
 
 @keyframes slidein {
       0% {
@@ -208,11 +234,11 @@ div{
             display: block;
             width: 100%;
             /* border-bottom: solid; */
-            background: #e4e4e4;
+            background: #4e4e4e;
                 }
 
                 .hourly-sub span:nth-child(even){
-                    background-color: #f7f7f7;
+                    background-color: #333333;
                 }
     }
 </style>

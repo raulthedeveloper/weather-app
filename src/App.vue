@@ -270,9 +270,22 @@ input:checked + .slider:before {
 
 
 
+.grow{
+  animation:grow 3s formward ease-out
+}
+
+@keyframes grow {
+   0% {
+        scaleY: 0;
+    }
+    100% {
+        scaleY: 340px;
+    }
+}
+
+
     
     .slide-col .meta-value{
-       
         animation: slidein 0.5s forwards ease-out ;
         transform-origin: 50% 0%;
     }
@@ -299,12 +312,12 @@ input:checked + .slider:before {
 
 
 .slide-in{
-   animation: slidein 0.5s forwards ease-out ;
+   animation: slidein 1s forwards ease-out ;
   transform-origin: 50% 0%;
 }
 
 .slide-out{
-       animation: slideout 0.5s forwards ease-out ;
+       animation: slideout 1s forwards ease-out ;
   transform-origin: 50% 0%;
 }
    

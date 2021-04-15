@@ -1,5 +1,5 @@
 <template>
-   <div class="card fade-up" :style="darkMode ? 'background:#3e3e3e' : null">
+   <div class="card fade-up"  :style="darkMode ? 'background:#3e3e3e' : null">
 
       <h2 :id="darkMode ? 'darkMode-text' : null">{{location.name}}</h2>
       <span class="current-sub-title" :id="darkMode ? 'darkMode-text' : null">{{location.region}}</span>
@@ -20,8 +20,8 @@
            </div>
       </div>
 
-      <div class="flex-row fade-down">
-          <div class="col-6">
+      <div class="flex-row" >
+          <div class="col-6" >
            
 
             <div class="row " :class="darkMode ? 'darkMode-meta-value' : 'meta-value'">
@@ -34,7 +34,7 @@
                <span>{{ current.pressure_in}} inHg</span>
            </div>
             
-           <div v-if="seeMore" :class="seeMore ? 'slide-col' : 'slide-out-col'">
+           <div class="fade-down "  :class="seeMore && initialLoad ? 'slide-col expand-col' : initialLoad ? 'slide-out-col contract-col': null">
                <div class="row" :class="darkMode ? 'darkMode-meta-value' : 'meta-value'">
                <span>UV Index</span>
                <span>{{current.uv}}/10</span>
@@ -71,7 +71,7 @@
                <span>{{current.humidity}}%</span>
            </div>
 
-          <div v-if="seeMore" :class="slideDown < 2 ? 'slide-col' : null">
+          <div class="fade-down "  :class="seeMore && initialLoad ? 'slide-col expand-col' : initialLoad ? 'slide-out-col contract-col': null" >
 
                <div class="row" :class="darkMode ? 'darkMode-meta-value' : 'meta-value'">
                <span>Moon Phase</span>
@@ -110,6 +110,7 @@ export default {
             symbol:"F",
             measure:"mph",
             seeMore:false,
+            initialLoad:false,
             weather:String,
             slideDown:0
         }
@@ -121,6 +122,7 @@ export default {
     methods:{
         seeMoreToggle(){
             this.seeMore = !this.seeMore
+            this.initialLoad = true
             // if(this.slideDown < 2){
             //     this.slideDown+=1
             // }
@@ -135,7 +137,37 @@ export default {
 
 <style scoped>
 
+.fade-down{
+    height: 0;
+    overflow: hidden;
+}
 
+.expand-col{
+    animation: grow 1.2s forwards ease-out;
+}
+
+.contract-col{
+    animation: shrink .5s forwards;
+}
+
+@keyframes shrink {
+    from{
+        height:400px;
+    }
+    to{
+        height:0;
+    }
+}
+
+
+@keyframes grow {
+    from{
+        height:0;
+    }
+    to{
+        height:400px;
+    }
+}
 
 .current-sub-title{
     font-size: 1rem;
