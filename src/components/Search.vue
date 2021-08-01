@@ -101,7 +101,7 @@
                 this.isLoading = true
                 const options = {
                     method: 'GET',
-                    url: `http://api.weatherapi.com/v1/search.json?key=1590231e5d674493844164905201310&q=${this.search}`,
+                    url: `https://api.weatherapi.com/v1/search.json?key=1590231e5d674493844164905201310&q=${this.search}`,
                 }
 
                 axios.request(options).then((response) => {
