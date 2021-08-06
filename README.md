@@ -1,5 +1,8 @@
 # weather-app
 
+## Screen Shots
+<!-- ![GitHub Logo](/images/logo.png) -->
+
 ## Project setup
 ```
 npm install
