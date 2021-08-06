@@ -1,7 +1,7 @@
 # weather-app
 
 ## Screen Shots
-<!-- ![GitHub Logo](/images/logo.png) -->
+![Screenshot 1](https://github.com/raulthedeveloper/weather-app/blob/master/wa-1.png)
 
 ## Project setup
 ```
